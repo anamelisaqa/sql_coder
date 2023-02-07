@@ -86,7 +86,3 @@ VALUES ('Monitor Dell 32"','Monitores','Monitor Dell 32", HD, para escritorio',1
 ('Tijera escolar"','Libreria','Tijera escolar punta roma color azul',10,12,4),
 ('Lampara Led e27 14W','Ferreteria','Lampara led 14w e27',5,6,5)
 ;
-
-INSERT INTO ventas (id_cliente,dni,nombre_cliente,id_producto,cantidad,precio_venta,total,id_vendedor)
-VALUES ()
-;
