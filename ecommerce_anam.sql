@@ -86,3 +86,25 @@ VALUES ('Monitor Dell 32"','Monitores','Monitor Dell 32", HD, para escritorio',1
 ('Tijera escolar"','Libreria','Tijera escolar punta roma color azul',10,12,4),
 ('Lampara Led e27 14W','Ferreteria','Lampara led 14w e27',5,6,5)
 ;
+
+/*CREACION DE TABLAS VISTAS*/
+
+CREATE VIEW vista_clientes AS
+SELECT id_cliente, dni, nombre, apellido, telefono, direccion
+FROM clientes;
+
+CREATE VIEW vista_proveedores AS
+SELECT id_proovedor, nombre_proovedor, telefono, website, direccion
+FROM proovedores;
+
+CREATE VIEW vista_vendedores AS
+SELECT id_vendedor, dni, nombre, apellido, telefono, departamento
+FROM vendedores;
+
+CREATE VIEW vista_productos AS
+SELECT id_producto, nombre_producto, categoria, descripcion, precio, precio_venta, id_proovedor
+FROM productos;
+
+CREATE VIEW vista_ventas AS
+SELECT id_ventas, id_cliente, dni, nombre_cliente, id_producto, cantidad, precio_venta, total, id_vendedor
+FROM ventas;
