@@ -59,7 +59,14 @@ VALUES (71327638,'Viola','Gash',2994561236,'Indepencia 238'),
 (35652365,'Pauli','Twiddell',2986523265,'General Roca 100'),
 (33236589,'Marina','Andrew',2984523655,'Leloir 456'),
 (40568945,'Javier','Alonso',2995682362,'Av Argentina 1200'),
-(50323236,'Alejandra','Munoz',2992365874,'Mitre 232')
+(50323236,'Alejandra','Munoz',2992365874,'Mitre 232'),
+(20325245,'Marcelo','Perez',2995255874,'Av Olascoaga 1050'),
+(96013956,'Mariana','Alvarez',2996357485,'Ministro Gonzalez 256'),
+(91233527,'Jonathan','Zambrano',2983265487,'Ruta 22 100'),
+(32654852,'Rosalba','Gonzalez',2994562485,'Pehuen 38'),
+(35632569,'Karen','Ramos',2995554826,'Ilia 633'),
+(40526874,'Ivanna','Altuve',2996520364,'Godoy Cruz 929'),
+(41562365,'Micaela','Rosas',2994587410,'Fotheringham 265')
 ;
 
 INSERT INTO proovedores (nombre_proovedor, telefono,website, direccion)
@@ -80,31 +87,85 @@ VALUES (25933535,'Claudio','Nazoa','2995426359','Textiles'),
 ;
 
 INSERT INTO productos (nombre_producto,categoria,descripcion,precio,precio_venta,id_proovedor)
-VALUES ('Monitor Dell 32"','Monitores','Monitor Dell 32", HD, para escritorio',100,120,1),
-('Maceta mediana','Jardineria','Maceta mediana plástico color rojo',10,12,2),
-('Zapatilla Nike modelo 236-2','Zapatería','Zapatilla nike Talle 36, coolor negro',100,120,3),
-('Tijera escolar"','Libreria','Tijera escolar punta roma color azul',10,12,4),
-('Lampara Led e27 14W','Ferreteria','Lampara led 14w e27',5,6,5)
+VALUES ('Monitor Dell 32"','Tecnologia','Monitor Dell 32", HD, para escritorio', 100, 120, 1),
+('Teclado gamer','Tecnologia','Teclado gamer RGB, mecánico, retroiluminado', 40, 50, 1),
+('Mouse gamer','Tecnologia','Mouse inalambrico, 8000 dpi, color negro RGB', 25, 35, 1),
+('Impresora hp inkject 415','Tecnologia','Inpresora inalambrica, scanner, color negro de inyeccion de tinta continua',68,85,1),
+('Maceta mediana','Jardineria','Maceta mediana plástico color rojo', 10, 12, 2),
+('Semillas de Lechuga','Jardineria','Semillas organicas de lechuga, 5 g', 1, 1.5, 2),
+('Semillas de Albahaca','Jardineria','Semillas organicas de albahaca, 5 g', 1, 1.5, 2),
+('Semillas de Melon','Jardineria','Semillas organicas de melon, 5 g', 1, 1.5, 2),
+('Semillas de Rabano','Jardineria','Semillas organicas de rabano, 5 g', 1, 1.5, 2),
+('Zapatilla Nike modelo 236-2','Zapatería','Zapatilla nike Talle 36, color negro', 100, 120, 3),
+('Zapatilla Nike modelo 236-2','Zapatería','Zapatilla nike Talle 37, color negro', 100, 120, 3),
+('Zapatilla Nike modelo 236-2','Zapatería','Zapatilla nike Talle 38, color negro', 100, 120, 3),
+('Zapatilla Nike modelo 236-2','Zapatería','Zapatilla nike Talle 39, color negro', 100, 120, 3),
+('Zapatilla Adidad modelo classic','Zapatería','Zapatilla adidas Talle 36, color blanco', 112, 140, 3),
+('Zapatilla Adidad modelo classic','Zapatería','Zapatilla adidas Talle 37, color blanco', 112, 140, 3),
+('Zapatilla Adidad modelo classic','Zapatería','Zapatilla adidas Talle 38, color blanco', 112, 140, 3),
+('Zapatilla Adidad modelo classic','Zapatería','Zapatilla adidas Talle 39, color blanco', 112, 140, 3),
+('Tijera escolar','Libreria','Tijera escolar punta roma color azul', 10, 12, 4),
+('Block de papel 210 g','Libreria','Blosk de hojas blancas para dibuejar, 210 g', 8, 10, 4),
+('Pinturas acrilicas 12 colores','Libreria','Kit de pinturas acrilicas 12 colores', 16, 20, 4),
+('Juego de escuadras','Libreria','Juego de escuadras geometrico, 4 piezas', 3, 4, 4),
+('Caja de Lapices HB marca Mongol','Libreria','Caja de 12 lapices HB', 10, 12, 4),
+('Caja de creyones prismacolor','Libreria','Caja de 24 lapices de colores', 16, 20, 4),
+('Lampara Led e27 14W','Ferreteria','Lampara led 14w e27',5,6,5),
+('Pintura alba para exteriores, blanco','Ferreteria','pintura alba, exteriores, color blanco, 1 gal',20,24,5),
+('Pintura alba para exteriores, celeste','Ferreteria','pintura alba, exteriores, color celeste, 1 gal',20,24,5),
+('Pintura alba para exteriores, marfil','Ferreteria','pintura alba, exteriores, color marfil',20,24,5),
+('Pintura alba para exteriores, turquesa','Ferreteria','pintura alba, exteriores, color turquesa',20,24,5),
+('Pintura alba para exteriores, lila','Ferreteria','pintura alba, exteriores, color lila',20,24,5)
+;
+
+INSERT INTO ventas (id_cliente,dni,nombre_cliente,id_producto,cantidad,precio_venta,total,id_vendedor)
+VALUES (1,71327638,'Viola',10,1,120,120,1),
+(2,35652365,'Pauli',19,1,10,10,1),
+(3,33236589,'Marina',4,1,85,85,6),
+(4,40568945,'Javier',3,1,35,35,6),
+(5,50323236,'Alejandra',11,1,120,120,3)
 ;
 
 /*CREACION DE TABLAS VISTAS*/
 
-CREATE VIEW vista_clientes AS
-SELECT id_cliente, dni, nombre, apellido, telefono, direccion
-FROM clientes;
+CREATE VIEW productos_proovedor AS
+SELECT p.nombre_producto, pv.nombre_proovedor, pv.telefono
+FROM productos AS p
+JOIN proovedores AS pv ON p.id_proovedor = pv.id_proovedor
+;
+SELECT * FROM productos_proovedor
+;
 
-CREATE VIEW vista_proveedores AS
-SELECT id_proovedor, nombre_proovedor, telefono, website, direccion
-FROM proovedores;
+CREATE VIEW clientes_ventas AS 
+SELECT c.id_cliente, c.nombre, c.apellido, v.id_producto, v.cantidad, v.precio_venta, v.total 
+FROM clientes AS c 
+INNER JOIN ventas AS v ON c.id_cliente = v.id_cliente
+;
+SELECT * FROM clientes_ventas
+;
 
-CREATE VIEW vista_vendedores AS
-SELECT id_vendedor, dni, nombre, apellido, telefono, departamento
-FROM vendedores;
+CREATE VIEW ventas_vendedores AS
+SELECT v.id_ventas, ve.nombre AS nombre_vendedor, ve.departamento, v.total
+FROM ventas AS v
+JOIN vendedores AS ve ON v.id_vendedor = ve.id_vendedor
+;
+SELECT * FROM ventas_vendedores
+;
 
-CREATE VIEW vista_productos AS
-SELECT id_producto, nombre_producto, categoria, descripcion, precio, precio_venta, id_proovedor
-FROM productos;
+CREATE VIEW ventas_clientes_vendedores AS
+SELECT v.id_ventas, c.nombre AS nombre_cliente, v.dni, v.id_producto, v.cantidad, v.precio_venta, v.total, ve.nombre AS nombre_vendedor
+FROM ventas AS v
+LEFT JOIN clientes AS c ON v.id_cliente = c.id_cliente
+LEFT JOIN vendedores AS ve ON v.id_vendedor = ve.id_vendedor
+;
+SELECT * FROM ventas_clientes_vendedores
+;
 
-CREATE VIEW vista_ventas AS
-SELECT id_ventas, id_cliente, dni, nombre_cliente, id_producto, cantidad, precio_venta, total, id_vendedor
-FROM ventas;
+CREATE VIEW ventas_producto_info AS
+SELECT v.id_ventas, p.nombre_producto, p.categoria, p.descripcion, p.precio, pv.nombre_proovedor, v.cantidad, v.precio_venta, v.total
+FROM ventas AS v
+LEFT JOIN productos AS p ON v.id_producto = p.id_producto
+LEFT JOIN proovedores AS pv ON p.id_proovedor = pv.id_proovedor
+;
+SELECT * FROM ventas_producto_info
+;
