@@ -169,3 +169,35 @@ LEFT JOIN proovedores AS pv ON p.id_proovedor = pv.id_proovedor
 ;
 SELECT * FROM ventas_producto_info
 ;
+
+/*FUNCIONES*/
+
+DELIMITER //
+CREATE FUNCTION total_ventas_cliente(cliente_id INT) 
+RETURNS FLOAT
+DETERMINISTIC
+BEGIN
+    DECLARE total_ventas FLOAT;
+    SELECT SUM(total) INTO total_ventas
+    FROM ventas
+	WHERE id_cliente = cliente_id;
+    RETURN total_ventas;
+END;
+//
+
+select total_ventas_cliente (1);
+
+DELIMITER //
+CREATE FUNCTION obtener_proovedor_producto (id_producto_entrada INT) 
+RETURNS VARCHAR (100)
+DETERMINISTIC
+BEGIN
+    DECLARE proveedor_nombre VARCHAR(100);
+    SELECT nombre_proovedor INTO proveedor_nombre 
+    FROM proovedores 
+    WHERE id_proovedor = (SELECT id_proovedor FROM productos WHERE id_producto = id_producto_entrada);
+    RETURN proveedor_nombre;
+END;
+// 
+
+select obtener_proovedor_producto (1);
