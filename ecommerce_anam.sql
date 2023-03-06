@@ -201,3 +201,41 @@ END;
 // 
 
 select obtener_proovedor_producto (1);
+
+/*SENTENCIAS SUBLENGUAJE TCL
+TABLAS SELECCIONADAS: CLIENTES Y PRODUCTOS*/
+
+START TRANSACTION; 
+DELETE FROM products
+WHERE id_product=1;
+
+ROLLBACK;
+
+COMMIT;
+
+START TRANSACTION; 
+DELETE FROM products
+WHERE id_product=1;
+
+ROLLBACK;
+
+COMMIT;
+
+START TRANSACTION; 
+INSERT INTO clientes (dni, nombre, apellido, telefono, direccion)
+VALUES (98563215, Ana, Mendez, 2995642356, Av El trabajador 542),
+(32154896, Alberto, Marquez, 2994526235, Paseo de la Costa 2000),
+(35865452, Orlando, Guillen, 2996357472, Tucuman 466),
+(30569852, Maria, Addy, 2994728525, Santa Fe 261);
+SAVEPOINT savepoint_1;
+
+INSERT INTO clientes (dni, nombre, apellido, telefono, direccion)
+VALUES (92563215, Victor, Abreu, 2995558896, Buenos Aires 563),
+(42685326, Marco, Tarazona, 2995684215, San Luis 425),
+(36852410, Susana, Rosas, 2992223366, La Rioja 1500),
+(29565321, Jose, Roman, 2998503265, Cordoba 2025);
+SAVEPOINT savepoint_2;
+
+ROLLBACK;
+
+COMMIT;
